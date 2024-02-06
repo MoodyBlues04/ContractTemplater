@@ -20,6 +20,7 @@
 </head>
 <body>
     <x-public-header/>
+    <x-session-messages-alert/>
 
     @yield('content')
 

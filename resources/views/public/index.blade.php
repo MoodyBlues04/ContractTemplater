@@ -11,7 +11,7 @@
                     <p>
                         Мы вынуждены отталкиваться от того, что перспективное планирование требует анализа экспериментов, поражающих по своей масштабности и грандиозности. Равным образом, семантический разбор внешних.
                     </p>
-                    <button type="button" class="btn-log-in">Регистрация</button>
+                    <a href="{{ route('auth.register_page') }}" type="button" class="btn-log-in">Регистрация</a>
                 </div>
                 <div class="section1-container-right__main">
                     <img src="{{ asset('/img/Illustration.png') }}" alt="">
@@ -199,7 +199,7 @@
                         </span>
                         </div>
                     </div>
-                    <a href="">Попробовать</a>
+                    <a href="{{ route('auth.register_page') }}" type="button">Попробовать</a>
                 </div>
             </div>
         </div>
@@ -267,7 +267,7 @@
                     <p>
                         Donec a eros justo. Fusce egestas tristique ultrices. Nam tempor, augue nec tincidunt molestie, massa nunc varius arcu, at scelerisque elit erat a magna. Donec quis erat at libero ultrices mollis. In hac habitasse platea dictumst. Vivamus vehicula leo dui, at porta nisi facilisis finibus. In euismod augue vitae nisi ultricies, non aliquet urna tincidunt. Integer in nisi eget nulla commodo faucibus efficitur quis massa. Praesent felis est, finibus et nisi ac, hendrerit venenatis libero. Donec consectetur faucibus ipsum id gravida.
                     </p>
-                    <button type="button">Пройти регистрацию</button>
+                    <a href="{{ route('auth.register_page') }}" type="button">Пройти регистрацию</a>
                 </div>
             </div>
         </div>

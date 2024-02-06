@@ -11,9 +11,11 @@ Route::controller(AuthController::class)->as('auth.')->group(function() {
     Route::post('/login', 'login')->name('login');
     Route::get('/home', 'home')->name('home'); // ?
     Route::post('/logout', 'logout')->name('logout');
+
+//    TODO recover password
 });
 
-Route::group(['prefix' => 'email', 'as' => 'verify_email.'], function() {
+Route::group(['prefix' => 'email', 'as' => 'verification.'], function() {
     Route::get('/verify', EmailVerifyController::class . '@notice')->name('notice');
     Route::get('/verify/{id}/{hash}', EmailVerifyController::class . '@verify')->name('verify');
     Route::post('/resend', EmailVerifyController::class . '@resend')->name('resend');
