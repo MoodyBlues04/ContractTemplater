@@ -24,7 +24,7 @@
                             <br>
                             <a href="{{ route('auth.register_page') }}"> У меня нет аккаунта</a>
                             <br>
-                            <a href="#"> TODO Забыли пароль</a>
+                            <a href="{{ route('auth.forgot_password') }}"> Забыли пароль? </a>
                         </div>
                     </form>
                 </div>

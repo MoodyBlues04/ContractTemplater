@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 use Illuminate\View\View;
 
 class AuthController extends Controller
@@ -19,9 +20,7 @@ class AuthController extends Controller
     /**
      * Instantiate a new LoginRegisterController instance.
      */
-    public function __construct(
-        private AuthService $authService
-    ) {
+    public function __construct(private AuthService $authService) {
         $this->middleware('guest')->except(['logout', 'home']);
         $this->middleware('auth')->only(['logout', 'home']);
         $this->middleware('verified')->only('home');
@@ -62,7 +61,7 @@ class AuthController extends Controller
     {
         $this->authService->logout($request);
 
-        return redirect()->route('login')
+        return redirect()->route('auth.login')
             ->with('success', 'You have logged out successfully!');
     }
 }

@@ -18,7 +18,8 @@ Route::prefix('admin')
     ->as('admin.')
     ->middleware(['auth', 'verified', 'admin'])
     ->group(__DIR__ . '/web/admin.php');
-Route::as('user.')
+Route::prefix('user')
+    ->as('user.')
     ->middleware(['auth', 'verified'])
     ->group(__DIR__ . '/web/user.php');
 
