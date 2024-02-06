@@ -49,19 +49,19 @@
                     <h4>Меню сайта</h4>
                     <ul>
                         <li>
-                            <a href="">About us</a>
+                            <a href="{{ route('public.about_us') }}">About us</a>
                         </li>
                         <li>
-                            <a href="">Blog</a>
+                            <a href="{{ route('public.clients') }}">Blog</a>
                         </li>
                         <li>
-                            <a href="">Contact us</a>
+                            <a href="{{ route('public.clients') }}">Contact us</a>
                         </li>
                         <li>
-                            <a href="">Pricing</a>
+                            <a href="{{ route('public.clients') }}">Pricing</a>
                         </li>
                         <li>
-                            <a href="">Testimonials</a>
+                            <a href="{{ route('public.clients') }}">Testimonials</a>
                         </li>
                     </ul>
                 </div>
@@ -69,25 +69,26 @@
                     <h4>Информация</h4>
                     <ul>
                         <li>
-                            <a href="">Help center</a>
+                            <a href="{{ route('public.clients') }}">Help center</a>
                         </li>
                         <li>
-                            <a href="">Terms of service</a>
+                            <a href="{{ route('public.clients') }}">Terms of service</a>
                         </li>
                         <li>
-                            <a href="">Legal</a>
+                            <a href="{{ route('public.clients') }}">Legal</a>
                         </li>
                         <li>
-                            <a href="">Privacy policy</a>
+                            <a href="{{ route('public.clients') }}">Privacy policy</a>
                         </li>
                         <li>
-                            <a href="">Status</a>
+                            <a href="{{ route('public.clients') }}">Status</a>
                         </li>
                     </ul>
                 </div>
                 <div class="footer-container-right-block footer-container-right-block-input">
                     <h4>Получайте новости!</h4>
                     <div class="footer-container-right-block-input">
+{{--                        TODO form if need --}}
                         <input type="email" placeholder="Ваша почта">
                         <img src="{{ asset('/img/send.svg') }}" alt="">
                     </div>
