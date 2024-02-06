@@ -14,6 +14,7 @@ use Illuminate\Notifications\Notifiable;
  * @property ?string $email_verified_at
  * @property string $phone
  * @property string $password
+ * @property bool $is_admin
  * @property ?string $remember_token
  * @property string $created_at
  * @property string $updated_at
@@ -32,6 +33,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'phone',
+        'is_admin',
     ];
 
     /**
