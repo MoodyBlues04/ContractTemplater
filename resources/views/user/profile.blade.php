@@ -20,7 +20,7 @@
     <section class="section1__lk-data">
         <div class="container container-lk">
             <div class="section1-top__lk-data">
-                <p>Привет Олег!</p>
+                <p>Привет, {{ $user->name }}!</p>
                 <a href="" type="button" onclick="enableForm()">
                     Редактировать данные
                 </a>
