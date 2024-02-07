@@ -23,6 +23,11 @@ abstract class Repository
         return $this->query->create($attributes);
     }
 
+    public function update(array $attributes, Model $model): bool
+    {
+        return $model->update($attributes);
+    }
+
     public function firstBy(array $params): Model
     {
         return $this->query->where($params)->first();

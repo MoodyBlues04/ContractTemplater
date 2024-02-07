@@ -1,4 +1,4 @@
-<div class="row justify-content-center">
+<div class="row justify-content-center" style="margin-top: 100px">
     <div class="col-md-6">
         @if (session()->has('success'))
             <div class="alert alert-success">
