@@ -16,8 +16,8 @@ Route::controller(AuthController::class)->as('auth.')->group(function() {
 Route::controller(PasswordResetController::class)->as('password.')->group(function() {
     Route::get('/forgot-password', 'forgotPassword')->name('request');
     Route::post('/forgot-password', 'resetEmail')->name('email');
-    Route::get('/reset-password/{token}', 'resetForm')->name('reset');
-    Route::post('/reset-password', 'reset')->name('update');
+    Route::get('/reset-password/{token}', 'reset')->name('reset');
+    Route::post('/reset-password', 'update')->name('update');
 });
 
 Route::group(['prefix' => 'email', 'as' => 'verification.'], function() {
