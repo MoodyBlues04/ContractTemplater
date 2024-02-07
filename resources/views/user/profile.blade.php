@@ -6,7 +6,13 @@
 
 @section('scripts')
     <script>
-
+        function enableForm() {
+            event.preventDefault();
+            let inputs = document.getElementsByTagName('input');
+            for (const input of inputs) {
+                input.removeAttribute('readonly');
+            }
+        }
     </script>
 @endsection
 
@@ -15,7 +21,7 @@
         <div class="container container-lk">
             <div class="section1-top__lk-data">
                 <p>Привет Олег!</p>
-                <a href="">
+                <a href="" type="button" onclick="enableForm()">
                     Редактировать данные
                 </a>
             </div>
@@ -26,27 +32,27 @@
                 <div class="section1-container__lk-data">
                     <div class="section1-container-block__lk-data">
                         <p>Ваше имя</p>
-                        <input type="text" value="{{ $user->name }}" name="name">
+                        <input type="text" value="{{ $user->name }}" name="name" readonly>
                     </div>
                     <div class="section1-container-block__lk-data">
                         <p>Ваша почта</p>
-                        <input type="email" value="{{ $user->email }}" name="email">
+                        <input type="email" value="{{ $user->email }}" name="email" readonly>
                     </div>
                     <div class="section1-container-block__lk-data">
                         <p>Ваш телефон</p>
-                        <input type="tel" value="{{ $user->phone }}" name="phone">
+                        <input type="tel" value="{{ $user->phone }}" name="phone" readonly>
                     </div>
                     <div class="section1-container-block__lk-data">
                         <p>Ваша подписка</p>
-                        <input type="text" value="{{ 'Not yet' }}">
+                        <input type="text" value="{{ 'Not yet' }}" readonly>
                     </div>
                     <div class="section1-container-block__lk-data">
                         <p>Новый пароль</p>
-                        <input type="password" placeholder="password" name="password">
+                        <input type="password" placeholder="password" name="password" readonly>
                     </div>
                     <div class="section1-container-block__lk-data">
                         <p>Повторите пароль</p>
-                        <input type="password" placeholder="password confirmation" name="password_confirmation">
+                        <input type="password" placeholder="password confirmation" name="password_confirmation" readonly>
                     </div>
                 </div>
                 <button class="save-lk-btn" type="submit">Сохранить данные</button>
