@@ -8,8 +8,19 @@ use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index(): View
     {
-        return view('user.profile');
+        $user = auth()->user();
+        return view('user.profile', compact('user'));
+    }
+
+    public function update()
+    {
+        
     }
 }
