@@ -6,9 +6,9 @@
             <div class="section1-container__main">
                 <div class="section1-container-top__main">
                     <h1>
-                        Login
+                        Enter your email to reset password
                     </h1>
-                    <form action="{{ route('auth.login') }}" method="POST">
+                    <form action="{{ route('password.email') }}" method="POST">
                         @csrf
 
                         <div class="row" style="width: 200px">
@@ -16,15 +16,7 @@
                                 Email
                                 <input type="email" name="email" required>
                             </label>
-                            <label for="password">
-                                Password
-                                <input type="password" name="password" required>
-                            </label>
-                            <button type="submit">Login</button>
-                            <br>
-                            <a href="{{ route('auth.register_page') }}"> У меня нет аккаунта</a>
-                            <br>
-                            <a href="{{ route('password.request') }}"> Забыли пароль? </a>
+                            <button type="submit">Send password reset code</button>
                         </div>
                     </form>
                 </div>

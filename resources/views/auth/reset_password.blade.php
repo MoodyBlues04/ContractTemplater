@@ -1,3 +1,6 @@
+<?php
+/** @var string $token */
+?>
 @extends('layouts.public-layout')
 
 @section('content')
@@ -6,9 +9,9 @@
             <div class="section1-container__main">
                 <div class="section1-container-top__main">
                     <h1>
-                        Login
+                        Reset password
                     </h1>
-                    <form action="{{ route('auth.login') }}" method="POST">
+                    <form action="{{ route('password.update') }}" method="POST">
                         @csrf
 
                         <div class="row" style="width: 200px">
@@ -20,11 +23,14 @@
                                 Password
                                 <input type="password" name="password" required>
                             </label>
-                            <button type="submit">Login</button>
-                            <br>
-                            <a href="{{ route('auth.register_page') }}"> У меня нет аккаунта</a>
-                            <br>
-                            <a href="{{ route('password.request') }}"> Забыли пароль? </a>
+                            <label for="password_confirmation">
+                                Password confirmation
+                                <input type="password" name="password_confirmation" required>
+                            </label>
+                            <label>
+                                <input type="hidden" name="token" value="{{$token}}" required>
+                            </label>
+                            <button type="submit">Reset</button>
                         </div>
                     </form>
                 </div>

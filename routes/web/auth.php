@@ -13,11 +13,11 @@ Route::controller(AuthController::class)->as('auth.')->group(function() {
     Route::post('/logout', 'logout')->name('logout');
 });
 
-Route::controller(PasswordResetController::class)->as('auth.')->group(function() {
-    Route::get('/forgot-password', 'forgotPassword')->name('forgot_password');
-//    TODO finish https://laravel.com/docs/10.x/passwords
-//    Route::post('/forgot-password', 'recover')->name('password_recover');
-//    Route::get('/verify-password-recover', 'verifyPasswordRecover')->name('verify_password_recover');
+Route::controller(PasswordResetController::class)->as('password.')->group(function() {
+    Route::get('/forgot-password', 'forgotPassword')->name('request');
+    Route::post('/forgot-password', 'resetEmail')->name('email');
+    Route::get('/reset-password/{token}', 'resetForm')->name('reset');
+    Route::post('/reset-password', 'reset')->name('update');
 });
 
 Route::group(['prefix' => 'email', 'as' => 'verification.'], function() {
