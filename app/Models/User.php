@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -18,6 +20,8 @@ use Illuminate\Notifications\Notifiable;
  * @property ?string $remember_token
  * @property string $created_at
  * @property string $updated_at
+ *
+ * @property Collection $documents
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -55,4 +59,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function documents(): HasMany
+    {
+        return $this->hasMany(Document::class);
+    }
 }
