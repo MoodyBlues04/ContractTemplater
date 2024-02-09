@@ -19,8 +19,11 @@
     @yield('styles')
 </head>
 <body>
-    <x-public-header/>
+    @yield('header', App\View\Components\PublicHeader::resolve([])->render())
+
+{{--    TODO normal config modal window - doesnt work outside a 'section' --}}
     <x-session-messages-alert/>
+{{--    <x-modal/>--}}
 
     @yield('content')
 

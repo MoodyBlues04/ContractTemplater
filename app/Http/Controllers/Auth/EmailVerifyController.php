@@ -44,7 +44,7 @@ class EmailVerifyController extends Controller
     public function verify(EmailVerificationRequest $request): RedirectResponse
     {
         $request->fulfill();
-        return redirect()->route('auth.home');
+        return redirect()->route('user.profile.index');
     }
 
     /**

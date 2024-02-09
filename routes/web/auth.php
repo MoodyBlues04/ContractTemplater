@@ -10,7 +10,7 @@ Route::controller(AuthController::class)->as('auth.')->group(function() {
     Route::post('/register', 'register')->name('register');
     Route::get('/login', 'loginPage')->name('login_page');
     Route::post('/login', 'login')->name('login');
-    Route::post('/logout', 'logout')->name('logout');
+    Route::match(['GET', 'POST'], '/logout', 'logout')->name('logout');
 });
 
 Route::controller(PasswordResetController::class)->as('password.')->group(function() {
