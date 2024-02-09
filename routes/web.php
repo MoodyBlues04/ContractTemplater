@@ -20,7 +20,7 @@ Route::prefix('admin')
     ->group(__DIR__ . '/web/admin.php');
 Route::prefix('user')
     ->as('user.')
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth', 'verified', 'user'])
     ->group(__DIR__ . '/web/user.php');
 
 Route::as('public.')->group(function () {
