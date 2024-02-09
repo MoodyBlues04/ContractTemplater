@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\View\Objects\ModelToDropdownItem;
+use App\View\Objects\ToDropdownItemInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,9 +20,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property Collection $documentTypes
  * @property Collection $templates
  */
-class Field extends Model
+class Field extends Model implements ToDropdownItemInterface
 {
-    use HasFactory;
+    use HasFactory, ModelToDropdownItem;
 
     /**
      * The attributes that are mass assignable.

@@ -12,8 +12,7 @@
             <div class="col md-10">
                 <h3>Document types</h3>
 
-                {{--                <a href="{{ route('admin.field.create') }}" class="btn btn-primary">--}}
-                <a href="" class="btn btn-primary">
+                <a href="{{ route('admin.document_type.create') }}" class="btn btn-primary">
                     Create
                 </a>
 

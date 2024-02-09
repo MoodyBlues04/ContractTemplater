@@ -8,30 +8,7 @@ use App\Http\Controllers\Admin\TemplateController;
 
 Route::view('/', 'admin.index')->name('index');
 
-Route::prefix('user')
-    ->as('user.')
-    ->controller(UserController::class)
-    ->group(function() {
-        Route::get('/', 'index')->name('index');
-    });
-
-Route::prefix('field')
-    ->as('field.')
-    ->controller(FieldController::class)
-    ->group(function() {
-        Route::get('/', 'index')->name('index');
-    });
-
-Route::prefix('document-type')
-    ->as('document_type.')
-    ->controller(DocumentTypeController::class)
-    ->group(function() {
-        Route::get('/', 'index')->name('index');
-    });
-
-Route::prefix('template')
-    ->as('template.')
-    ->controller(TemplateController::class)
-    ->group(function() {
-        Route::get('/', 'index')->name('index');
-    });
+Route::resource('document_type', DocumentTypeController::class);
+Route::resource('template', TemplateController::class)->only(['index']);
+Route::resource('user', UserController::class)->only(['index']);
+Route::resource('field', FieldController::class)->only(['index']);
