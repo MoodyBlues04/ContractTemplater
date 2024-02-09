@@ -6,19 +6,19 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property int $id
  * @property string $name
- * @property string $label
- * @property string $type
+ * @property string $storage_path
  * @property string $created_at
  * @property string $updated_at
  *
- * @property Collection $documentTypes
- * @property Collection $templates
+ * @property Collection $contracts
+ * @property Collection $fields
  */
-class Field extends Model
+class Template extends Model
 {
     use HasFactory;
 
@@ -29,17 +29,16 @@ class Field extends Model
      */
     protected $fillable = [
         'name',
-        'label',
-        'type',
+        'storage_path',
     ];
 
-
-    public function documentTypes(): BelongsToMany
+    public function contracts(): HasMany
     {
-        return $this->belongsToMany(DocumentType::class, 'document_type_fields');
+        return $this->hasMany(Contract::class);
     }
-    public function templates(): BelongsToMany
+
+    public function fields(): BelongsToMany
     {
-        return $this->belongsToMany(Template::class, 'template_fields');
+        return $this->belongsToMany(Field::class, 'template_fields');
     }
 }

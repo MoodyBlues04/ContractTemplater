@@ -22,6 +22,7 @@ use Illuminate\Notifications\Notifiable;
  * @property string $updated_at
  *
  * @property Collection $documents
+ * @property Collection $contracts
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -63,5 +64,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function documents(): HasMany
     {
         return $this->hasMany(Document::class);
+    }
+
+    public function contracts(): HasMany
+    {
+        return $this->hasMany(Contract::class);
     }
 }
