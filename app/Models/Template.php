@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Http\UploadedFile;
 
 /**
  * @property int $id
@@ -21,6 +22,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Template extends Model
 {
     use HasFactory;
+
+    public const STORAGE_PREFIX = '/app/templates';
 
     /**
      * The attributes that are mass assignable.
@@ -40,5 +43,15 @@ class Template extends Model
     public function fields(): BelongsToMany
     {
         return $this->belongsToMany(Field::class, 'template_fields');
+    }
+
+    public static function storeTemplate(UploadedFile $file): string
+    {
+        $originalName = $file->getClientOriginalName();
+        $path = self::STORAGE_PREFIX;
+
+        $file->storeAs($path, $originalName);
+
+        return "$path/$originalName";
     }
 }
