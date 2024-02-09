@@ -32,4 +32,12 @@ abstract class Repository
     {
         return $this->query->where($params)->first();
     }
+
+    /**
+     * @return Model[]
+     */
+    public function getAll(): array
+    {
+        return $this->query->get()->all();
+    }
 }
