@@ -25,16 +25,15 @@
     @yield('styles')
 </head>
 <body>
-    <x-user-header/>
-    <x-user-nav-bar/>
+    @yield('header', App\View\Components\UserHeader::resolve([])->render())
+    @yield('nav-bar', App\View\Components\UserNavBar::resolve([])->render())
     <x-session-messages-alert/>
 
     @yield('content')
 
-    <x-public-footer/>
+    @yield('footer', App\View\Components\PublicFooter::resolve([])->render())
 
     @yield('scripts')
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
