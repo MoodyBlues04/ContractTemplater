@@ -29,9 +29,6 @@
                 @csrf
                 @method('PATCH')
 
-                <button type="button" class="openModal-error">КНОПОЧКА</button>
-
-
                 <div class="section1-container__lk-data">
                     <div class="section1-container-block__lk-data">
                         <p>Ваше имя</p>
