@@ -14,11 +14,12 @@ Route::prefix('profile')
         Route::get('/', 'index')->name('index');
         Route::patch('/{user}', 'update')->name('update');
 });
-Route::prefix('documents')
-    ->as('documents.')
+Route::prefix('document')
+    ->as('document.')
     ->controller(DocumentsController::class)
     ->group(function() {
         Route::get('/', 'index')->name('index');
+        Route::post('/', 'store')->name('store');
 });
 Route::prefix('contracts')
     ->as('contracts.')

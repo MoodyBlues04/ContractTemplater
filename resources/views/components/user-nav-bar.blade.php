@@ -36,7 +36,7 @@
                 <path d="M15.5799 10.58C15.5799 12.56 13.9799 14.17 11.9999 14.17C10.0199 14.17 8.41992 12.56 8.41992 10.58C8.41992 8.60002 10.0199 7 11.9999 7C13.9799 7 15.5799 8.60002 15.5799 10.58Z" stroke="#192126" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
         </a>
-        <a href="{{ route('user.documents.index') }}" class="left-menu-lk-content-link">
+        <a href="{{ route('user.document.index') }}" class="left-menu-lk-content-link">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <path d="M17 13.4V16.4C17 20.4 15.4 22 11.4 22H7.6C3.6 22 2 20.4 2 16.4V12.6C2 8.6 3.6 7 7.6 7H10.6" stroke="#9EA3AE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 <path d="M17.0001 13.4H13.8001C11.4001 13.4 10.6001 12.6 10.6001 10.2V7L17.0001 13.4Z" stroke="#9EA3AE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

@@ -108,15 +108,23 @@
 
                 @foreach($documentTypes as $documentType)
                     <div id="form-container-doc-type-{{$documentType->id}}" class="doc-type-form" style="display:none">
-                        <div class="section1-container__lk-data">
-                            @foreach($documentType->fields->all() as $field)
+                        <form action="{{ route('user.document.store') }}" method="POST">
+                            @csrf
+                            <div class="section1-container__lk-data">
                                 <div class="section1-container-block__lk-data">
-                                    <p>{{$field->label}}</p>
-                                    <input type="{{$field->type}}" name="{{$field->name}}">
+                                    <p>Имя документа</p>
+                                    <input type="text" name="name">
                                 </div>
-                            @endforeach
-                        </div>
-                        <button class="save-lk-btn-doc" type="submit">Сохранить данные</button>
+                                @foreach($documentType->fields->all() as $field)
+                                    <div class="section1-container-block__lk-data">
+                                        <p>{{$field->label}}</p>
+                                        <input type="{{$field->type}}" name="fields[{{$field->name}}]">
+                                    </div>
+                                @endforeach
+                                <input type="hidden" name="document_type" value="{{$documentType->id}}">
+                            </div>
+                            <button class="save-lk-btn-doc" type="submit">Сохранить данные</button>
+                        </form>
                     </div>
                 @endforeach
             </div>

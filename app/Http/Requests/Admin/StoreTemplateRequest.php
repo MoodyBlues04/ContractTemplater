@@ -43,7 +43,7 @@ class StoreTemplateRequest extends ExtraValidationRequest
     private function getFieldsNames(): array
     {
         return array_map(function ($fieldId) {
-            return Field::query()->find($fieldId)->name;
+            return Field::query()->findOrFail($fieldId)->name;
         }, $this->fields);
     }
 
