@@ -15,7 +15,7 @@ class ProfileController extends Controller
 {
     public function __construct(private UserRepository $userRepository)
     {
-        $this->middleware('auth');
+        $this->middleware('user');
     }
 
     public function index(): View
