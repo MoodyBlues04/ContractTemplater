@@ -1,6 +1,7 @@
 <?php
 /**
  * @var \App\Models\Template[] $templates
+ * @var \App\Models\Contract[] $contracts
  */
 ?>
 
@@ -42,84 +43,20 @@
             </div>
 
             <div id="agreement1" class="section1-container__lk-agreement section1-container-active__lk-agreement">
-                <div class="section1-container-block__lk-agreement">
-                    <div class="section1-container-block-img__lk-agreement">
-                        <img src="{{ asset('img/image%2010.png') }}" alt="">
+                @foreach($contracts as $contract)
+                    <div class="section1-container-block__lk-agreement">
+                        <div class="section1-container-block-img__lk-agreement">
+                            <img src="{{ asset('img/image%2010.png') }}" alt="">
+                        </div>
+                        <div class="section1-container-block-text__lk-agreement">
+                            <h3>{{ $contract->name }}</h3>
+                            <p>
+                                {{ $contract->description ?? '' }}
+                            </p>
+                        </div>
+                        <a type="button" class="openModal">Выбрать</a>
                     </div>
-                    <div class="section1-container-block-text__lk-agreement">
-                        <h3>Название договора</h3>
-                        <p>
-                            Our membership management software provides full automation of membership renewals and
-                            payments
-                        </p>
-                    </div>
-                    <button type="button" class="openModal">Выбрать</button>
-                </div>
-                <div class="section1-container-block__lk-agreement">
-                    <div class="section1-container-block-img__lk-agreement">
-                        <img src="{{ asset('img/image%2010.png') }}" alt="">
-                    </div>
-                    <div class="section1-container-block-text__lk-agreement">
-                        <h3>Название договора</h3>
-                        <p>
-                            Our membership management software provides full automation of membership renewals and
-                            payments
-                        </p>
-                    </div>
-                    <button type="button" class="openModal">Выбрать</button>
-                </div>
-                <div class="section1-container-block__lk-agreement">
-                    <div class="section1-container-block-img__lk-agreement">
-                        <img src="{{ asset('img/image%2010.png') }}" alt="">
-                    </div>
-                    <div class="section1-container-block-text__lk-agreement">
-                        <h3>Название договора</h3>
-                        <p>
-                            Our membership management software provides full automation of membership renewals and
-                            payments
-                        </p>
-                    </div>
-                    <button type="button" class="openModal">Выбрать</button>
-                </div>
-                <div class="section1-container-block__lk-agreement">
-                    <div class="section1-container-block-img__lk-agreement">
-                        <img src="{{ asset('img/image%2010.png') }}" alt="">
-                    </div>
-                    <div class="section1-container-block-text__lk-agreement">
-                        <h3>Название договора</h3>
-                        <p>
-                            Our membership management software provides full automation of membership renewals and
-                            payments
-                        </p>
-                    </div>
-                    <button type="button" class="openModal">Выбрать</button>
-                </div>
-                <div class="section1-container-block__lk-agreement">
-                    <div class="section1-container-block-img__lk-agreement">
-                        <img src="{{ asset('img/image%2010.png') }}" alt="">
-                    </div>
-                    <div class="section1-container-block-text__lk-agreement">
-                        <h3>Название договора</h3>
-                        <p>
-                            Our membership management software provides full automation of membership renewals and
-                            payments
-                        </p>
-                    </div>
-                    <button type="button" class="openModal">Выбрать</button>
-                </div>
-                <div class="section1-container-block__lk-agreement">
-                    <div class="section1-container-block-img__lk-agreement">
-                        <img src="{{ asset('img/image%2010.png') }}" alt="">
-                    </div>
-                    <div class="section1-container-block-text__lk-agreement">
-                        <h3>Название договора</h3>
-                        <p>
-                            Our membership management software provides full automation of membership renewals and
-                            payments
-                        </p>
-                    </div>
-                    <button type="button" class="openModal">Выбрать</button>
-                </div>
+                @endforeach
             </div>
 
             <div class="section1-container__lk-agreement" id="agreement2">

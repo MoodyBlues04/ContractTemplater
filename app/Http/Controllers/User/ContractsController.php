@@ -26,10 +26,12 @@ class ContractsController extends Controller
 
     public function index(): View
     {
-//        TODO show real contracts in view
 //        TODO attach document opportunity
+//        TODO show page by link
         $templates = $this->templateRepository->getAll();
-        return view('user.contract', compact('templates'));
+        $contracts = $this->contractRepository->getAll();
+
+        return view('user.contract', compact('templates', 'contracts'));
     }
 
     /**
