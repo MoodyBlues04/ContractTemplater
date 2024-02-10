@@ -16,13 +16,8 @@ Route::prefix('profile')
 });
 
 Route::resource('document', DocumentsController::class)->only(['index', 'update', 'store']);
+Route::resource('contract', ContractsController::class)->only(['index', 'update', 'store']);
 
-Route::prefix('contracts')
-    ->as('contracts.')
-    ->controller(ContractsController::class)
-    ->group(function() {
-        Route::get('/', 'index')->name('index');
-});
 Route::prefix('tariff')
     ->as('tariff.')
     ->controller(TariffController::class)

@@ -5,7 +5,7 @@ namespace App\Helpers;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
 
-class WordHelper
+class WordDocument
 {
     public function __construct(private PhpWord $document)
     {

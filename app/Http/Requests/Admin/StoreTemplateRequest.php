@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
-use App\Helpers\WordHelper;
+use App\Helpers\WordDocument;
 use App\Http\Requests\ExtraValidationRequest;
 use App\Models\Field;
 use Illuminate\Validation\Rule;
@@ -54,7 +54,7 @@ class StoreTemplateRequest extends ExtraValidationRequest
     {
         $filePath = $this->file('template_file')->getRealPath();
 
-        $wordHelper = WordHelper::createFromFilePath($filePath);
+        $wordHelper = WordDocument::createFromFilePath($filePath);
         return $wordHelper->getTemplateFields();
     }
 }

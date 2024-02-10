@@ -38,6 +38,15 @@ class Contract extends Model
          'data',
     ];
 
+    protected $casts = [
+         'data' => 'array',
+    ];
+
+    public static function contractStoragePath(string $name, string $ext = ''): string
+    {
+        return storage_path("app/contracts/{$name}{$ext}");
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -46,5 +55,10 @@ class Contract extends Model
     public function template(): BelongsTo
     {
         return $this->belongsTo(Template::class);
+    }
+
+    public function getStoragePath(string $ext = ''): string
+    {
+        return self::contractStoragePath($this->name, $ext);
     }
 }

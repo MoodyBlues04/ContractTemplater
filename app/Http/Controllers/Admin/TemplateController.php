@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Helpers\WordHelper;
+use App\Helpers\WordDocument;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreTemplateRequest;
 use App\Repositories\FieldRepository;

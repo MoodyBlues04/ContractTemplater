@@ -9,7 +9,7 @@
 
 @section('scripts')
     <script>
-        function chooseDocType() {
+        function selectDocType() {
             event.preventDefault();
             let docTypeId = document.getElementById('doc_type_select').value;
             let docTypeFormId = `form-container-doc-type-${docTypeId}`;
@@ -88,7 +88,7 @@
 
             <div class="section1-top-container__lk-documents" id="doc4">
                 <h3>Создание</h3>
-                <select id="doc_type_select" name="doc_type" onchange="chooseDocType()">
+                <select id="doc_type_select" name="doc_type" onchange="selectDocType()">
                     <option value="{{null}}">Выберите тип документа</option>
                     @foreach($documentTypes as $documentType)
                         <option value="{{ $documentType->id }}">
@@ -106,7 +106,11 @@
                                     <p>Имя документа</p>
                                     <input type="text" name="name">
                                 </div>
-                                @foreach($documentType->fields->all() as $field)
+                                <div class="section1-container-block__lk-data">
+                                </div>
+                                <div class="section1-container-block__lk-data">
+                                </div>
+                                @foreach($documentType->getFields() as $field)
                                     <div class="section1-container-block__lk-data">
                                         <p>{{$field->label}}</p>
 {{--                                        TODO mb $field->id, not $field->name --}}

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\HasFields;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -21,9 +22,9 @@ use Illuminate\Http\UploadedFile;
  */
 class Template extends Model
 {
-    use HasFactory;
+    use HasFactory, HasFields;
 
-    private const STORAGE_PREFIX = '/templates';
+    private const STORAGE_PREFIX = 'templates';
 
     /**
      * The attributes that are mass assignable.
@@ -48,10 +49,15 @@ class Template extends Model
     public static function storeTemplate(UploadedFile $file): string
     {
         $originalName = $file->getClientOriginalName();
-        $path = self::STORAGE_PREFIX;
+        $path = self::STORAGE_PREFIX; // TODO test saving (changed storage_prefix)
 
         $file->storeAs($path, $originalName);
 
         return "$path/$originalName";
+    }
+
+    public function getFullPath(): string
+    {
+        return storage_path("/app/$this->storage_path");
     }
 }
