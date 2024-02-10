@@ -4,8 +4,6 @@ namespace App\Repositories;
 
 use App\Http\Requests\Admin\StoreFieldRequest;
 use App\Models\Field;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 
 class FieldRepository extends Repository
 {

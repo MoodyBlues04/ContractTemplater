@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\WordHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreTemplateRequest;
 use App\Repositories\FieldRepository;
@@ -9,6 +10,8 @@ use App\Repositories\TemplateRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use PhpOffice\PhpWord\IOFactory;
+use PhpOffice\PhpWord\TemplateProcessor;
 
 class TemplateController extends Controller
 {
@@ -33,9 +36,6 @@ class TemplateController extends Controller
 
     public function store(StoreTemplateRequest $request): RedirectResponse
     {
-//        TODO validate all fields inside model onsave & onupdate && validate template^ compare with given fields
-//        dd($request);
-
         $this->templateRepository->createFromRequest($request);
 
         return redirect()->route('admin.template.index');

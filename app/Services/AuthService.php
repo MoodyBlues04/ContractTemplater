@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Helpers\MailSender;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Repositories\UserRepository;

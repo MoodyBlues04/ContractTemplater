@@ -28,7 +28,7 @@ abstract class Repository
         return $model->update($attributes);
     }
 
-    public function firstBy(array $params): Model
+    public function firstBy(array $params): ?Model
     {
         return $this->query->where($params)->first();
     }
@@ -39,5 +39,10 @@ abstract class Repository
     public function getAll(): array
     {
         return $this->query->get()->all();
+    }
+
+    public function getById(int $id): ?Model
+    {
+        return $this->firstBy(['id' => $id]);
     }
 }
