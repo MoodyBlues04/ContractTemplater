@@ -11,7 +11,9 @@
                 <div data-tab-agreement="#agreement2" class="section1-top-block__lk-agreement">
                     Просмотр и редактирование договора
                 </div>
+{{--                TODO third button for creation pop up & creation. Total: Мои договоры; создвние; просмотр и редактирование (add form for redact) --}}
             </div>
+
             <div id="agreement1" class="section1-container__lk-agreement section1-container-active__lk-agreement">
                 <div class="section1-container-block__lk-agreement">
                     <div class="section1-container-block-img__lk-agreement">
@@ -86,15 +88,17 @@
                     <button type="button" class="openModal">Выбрать</button>
                 </div>
             </div>
+
             <div class="section1-container__lk-agreement" id="agreement2">
-                <div class="section1-container-blur__lk-agreement">
-                    <p>
-                        Доступ откроется после оплаты подписки на нашем сервисе
-                    </p>
-                    <a href="#!">
-                       Выбрать тариф для оплаты
-                    </a>
-                </div>
+{{--                <div class="section1-container-blur__lk-agreement">--}}
+{{--                    <p>--}}
+{{--                        Доступ откроется после оплаты подписки на нашем сервисе--}}
+{{--                    </p>--}}
+{{--                    <a href="#!">--}}
+{{--                       Выбрать тариф для оплаты--}}
+{{--                    </a>--}}
+{{--                </div>--}}
+{{--                TODO try change link to real pdf file --}}
                 <embed src="/img/Договор_об_оказании_услуг%20(5).pdf" type="application/pdf" width="100%" height="100%">
                 <div class="section1-container-btns__lk-agreement">
                     <a href="#!" class="redact-data-btn">Редактировать данные</a>
