@@ -20,7 +20,7 @@ class DocumentRepository extends Repository
         return $documentType->documents()->create([
             'user_id' => $request->user()->id,
             'name' => $request->name,
-            'data' => json_encode($request->fields),
+            'data' => $request->fields,
         ]);
     }
 }

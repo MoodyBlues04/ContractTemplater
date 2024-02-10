@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $user_id
  * @property int $document_type_id
  * @property string $name
- * @property string $data
+ * @property array $data
  *
  * @property DocumentType $documentType
  * @property User $user
@@ -30,6 +30,10 @@ class Document extends Model
         'document_type_id',
         'name',
         'data',
+    ];
+
+    protected $casts = [
+        'data' => 'array',
     ];
 
     public function documentType(): BelongsTo

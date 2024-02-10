@@ -14,13 +14,9 @@ Route::prefix('profile')
         Route::get('/', 'index')->name('index');
         Route::patch('/{user}', 'update')->name('update');
 });
-Route::prefix('document')
-    ->as('document.')
-    ->controller(DocumentsController::class)
-    ->group(function() {
-        Route::get('/', 'index')->name('index');
-        Route::post('/', 'store')->name('store');
-});
+
+Route::resource('document', DocumentsController::class)->only(['index', 'update', 'store']);
+
 Route::prefix('contracts')
     ->as('contracts.')
     ->controller(ContractsController::class)

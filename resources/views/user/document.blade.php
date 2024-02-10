@@ -1,5 +1,8 @@
 <?php
-/**  @var \App\Models\DocumentType[] $documentTypes */
+/**
+ * @var \App\Models\DocumentType[] $documentTypes
+ * @var \App\Models\Document[] $documents
+ */
 ?>
 
 @extends('layouts.user-layout')
@@ -57,42 +60,30 @@
             </div>
 
             <div class="section1-top-container__lk-documents" id="doc3">
-                <h3>Документ 1</h3>
-                <div class="section1-container__lk-data">
-                    <div class="section1-container-block__lk-data">
-                        <p>Ваше имя</p>
-                        <input type="text" placeholder="Олег">
-                    </div>
-                    <div class="section1-container-block__lk-data">
-                        <p>Ваша фамилия</p>
-                        <input type="text" placeholder="Петров">
-                    </div>
-                    <div class="section1-container-block__lk-data">
-                        <p>Ваша фамилия</p>
-                        <input type="text" placeholder="Олегович">
-                    </div>
-                    <div class="section1-container-block__lk-data">
-                        <p>Ваш день рождение</p>
-                        <input type="date">
-                    </div>
-                    <div class="section1-container-block__lk-data">
-                        <p>Серия документа</p>
-                        <input type="text" placeholder="123 123">
-                    </div>
-                    <div class="section1-container-block__lk-data">
-                        <p>Номер документа</p>
-                        <input type="text" placeholder="123 123">
-                    </div>
-                    <div class="section1-container-block__lk-data">
-                        <p>Кем выдан документ</p>
-                        <input type="text" placeholder="МВД ПО МСК">
-                    </div>
-                    <div class="section1-container-block__lk-data">
-                        <p>Дата выдачи</p>
-                        <input type="date">
-                    </div>
-                </div>
-                <button class="save-lk-btn-doc" type="button">Сохранить данные</button>
+                @foreach($documents as $document)
+                    <form action="{{ route('user.document.update', $document) }}" method="POST">
+                        @csrf
+                        @method('PATCH')
+
+                        <h3>{{$document->name}}</h3>
+                        <div class="section1-container__lk-data">
+                            <div class="section1-container-block__lk-data">
+                                <p>Имя документа</p>
+                                <input type="text" name="name" value="{{$document->name}}">
+                            </div>
+                            @foreach($document->documentType->getFields() as $field)
+                                <div class="section1-container-block__lk-data">
+                                    <p>{{$field->label}}</p>
+                                    <input
+                                        type="{{$field->type}}"
+                                        value="{{$document->data[$field->name]}}"
+                                        name="fields[{{$field->name}}]">
+                                </div>
+                            @endforeach
+                        </div>
+                        <button class="save-lk-btn-doc" type="submit">Сохранить данные</button>
+                    </form>
+                @endforeach
             </div>
 
             <div class="section1-top-container__lk-documents" id="doc4">
@@ -118,6 +109,7 @@
                                 @foreach($documentType->fields->all() as $field)
                                     <div class="section1-container-block__lk-data">
                                         <p>{{$field->label}}</p>
+{{--                                        TODO mb $field->id, not $field->name --}}
                                         <input type="{{$field->type}}" name="fields[{{$field->name}}]">
                                     </div>
                                 @endforeach
