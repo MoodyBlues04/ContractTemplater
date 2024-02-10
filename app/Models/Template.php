@@ -23,7 +23,7 @@ class Template extends Model
 {
     use HasFactory;
 
-    public const STORAGE_PREFIX = '/app/templates';
+    private const STORAGE_PREFIX = '/templates';
 
     /**
      * The attributes that are mass assignable.

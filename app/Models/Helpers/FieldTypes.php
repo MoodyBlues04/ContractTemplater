@@ -2,6 +2,8 @@
 
 namespace App\Models\Helpers;
 
+use App\View\Objects\DropdownItem;
+
 class FieldTypes
 {
     public const INT = 'int';
@@ -15,4 +17,12 @@ class FieldTypes
         self::DATE,
         self::DATETIME,
     ];
+
+    /**
+     * @return DropdownItem[]
+     */
+    public static function getAsDropdownItems(): array
+    {
+        return array_map(fn (string $fieldType) => new DropdownItem($fieldType, $fieldType), self::TYPES);
+    }
 }
