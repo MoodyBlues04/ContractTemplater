@@ -25,6 +25,7 @@ class ContractsController extends Controller
     {
 //        TODO attach document opportunity
 //        TODO show page by link
+//        TODO edit contract data
         $templates = $this->templateRepository->getAll();
         $contracts = $this->contractRepository->getAll();
 
