@@ -15,10 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->string('storage_path')->nullable();
             $table->json('data')->nullable();
+
             $table->foreignId('user_id');
             $table->foreignId('template_id');
+            $table->foreignId('docx_file_id')->nullable();
+            $table->foreignId('pdf_file_id')->nullable();
+
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
@@ -27,6 +30,17 @@ return new class extends Migration
                 ->references('id')
                 ->on('templates')
                 ->onDelete('cascade');
+            $table->foreign('docx_file_id')
+                ->references('id')
+                ->on('files')
+                ->onDelete('set null');
+            $table->foreign('pdf_file_id')
+                ->references('id')
+                ->on('files')
+                ->onDelete('set null');
+
+            $table->unique(['name', 'user_id']);
+
             $table->timestamps();
         });
     }

@@ -69,6 +69,18 @@
                 {{--                    </a>--}}
                 {{--                </div>--}}
                 {{--                TODO test change link to real pdf file --}}
+
+
+
+
+
+                
+{{--            TODO !!!!!!!!!! buttons on top not on JS, but on php => 3 views with same top buttons => 3 actions: index, create, show --}}
+
+
+
+
+
                 <embed src="/img/Договор_об_оказании_услуг%20(5).pdf" type="application/pdf" width="100%" height="100%">
                 <div class="section1-container-btns__lk-agreement">
                     <a href="#!" class="redact-data-btn">Редактировать данные</a>

@@ -54,7 +54,7 @@ class StoreTemplateRequest extends ExtraValidationRequest
     {
         $filePath = $this->file('template_file')->getRealPath();
 
-        $wordHelper = WordDocument::createFromFilePath($filePath);
-        return $wordHelper->getTemplateFields();
+        $wordDoc = WordDocument::createFromFilePath($filePath);
+        return $wordDoc->getTemplateFields();
     }
 }

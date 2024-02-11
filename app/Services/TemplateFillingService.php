@@ -4,8 +4,11 @@ namespace App\Services;
 
 use App\Helpers\WordToPdf;
 use App\Models\Contract;
+use App\Models\File;
 use App\Models\Template;
 use Illuminate\Validation\ValidationException;
+use PhpOffice\PhpWord\Exception\CopyFileException;
+use PhpOffice\PhpWord\Exception\CreateTemporaryFileException;
 use PhpOffice\PhpWord\Exception\Exception;
 use PhpOffice\PhpWord\TemplateProcessor;
 
@@ -13,18 +16,29 @@ class TemplateFillingService
 {
     /**
      * @throws ValidationException
-     * @throws Exception
      */
-    public function fillTemplate(Template $template, string $contractName, array $fieldsData): bool
+    public function fillTemplate(Contract $contract, Template $template, array $fieldsData): bool
     {
         $template->validateFields($fieldsData);
 
-        $templateProcessor = new TemplateProcessor($template->getFullPath());
+        try {
+            $templateProcessor = new TemplateProcessor(storage_path($template->file->path));
+        } catch (CopyFileException|CreateTemporaryFileException $e) {
+            return false;
+        }
+
         $templateProcessor->setValues($fieldsData);
 
-        $wordFileName = Contract::contractStoragePath($contractName, '.docx');
-        $templateProcessor->saveAs($wordFileName);
+        $wordFileName = $contract->getStoragePath('.docx');
+        $templateProcessor->saveAs(storage_path($wordFileName));
+        $contract->docxFile()->create(['path' => $wordFileName]);
 
-        return WordToPdf::wordToPdf($wordFileName, Contract::contractStoragePath($contractName, '.pdf'));
+        $pdfFileName = $contract->getStoragePath('.pdf');
+        if (!WordToPdf::wordToPdf(storage_path($wordFileName), storage_path($pdfFileName))) {
+            return false;
+        }
+        $contract->pdfFile()->create(['path' => $pdfFileName]);
+
+        return true;
     }
 }

@@ -30,7 +30,7 @@
                         <tr>
                             <th scope="row">{{ $idx + 1 }}</th>
                             <td>{{ $template->name }}</td>
-                            <td>{{ $template->storage_path }}</td>
+                            <td>{{ $template->file->path }}</td>
                             <td>{{ $template->fields->map(fn($field) => $field->name)->toJson() }}</td>
                         </tr>
                     @endforeach

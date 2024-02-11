@@ -34,6 +34,9 @@ class TemplateController extends Controller
         return view('admin.template.create', compact('fieldOptions'));
     }
 
+    /**
+     * @throws \Exception
+     */
     public function store(StoreTemplateRequest $request): RedirectResponse
     {
         $this->templateRepository->createFromRequest($request);

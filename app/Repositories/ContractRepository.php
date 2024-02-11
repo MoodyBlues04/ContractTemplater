@@ -13,14 +13,13 @@ class ContractRepository extends Repository
         parent::__construct(Contract::class);
     }
 
-    public function createFromRequest(StoreContractRequest $request): mixed
+    public function createFromRequest(StoreContractRequest $request): Contract
     {
         /** @var Template $template */
         $template = Template::query()->findOrFail($request->template);
+        /** @var Contract */
         return $template->contracts()->create([
             'user_id' => $request->user()->id,
-//        TODO better contract->doc & contract->pdf -> links to File model with all the stuff
-            'storage_path' => Contract::contractStoragePath($request->name),
             'name' => $request->name,
             'description' => $request->description,
             'data' => $request->fields,

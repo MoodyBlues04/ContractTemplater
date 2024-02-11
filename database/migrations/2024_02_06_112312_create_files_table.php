@@ -11,14 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('templates', function (Blueprint $table) {
+        Schema::create('files', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->foreignId('file_id')->nullable();
-            $table->foreign('file_id')
-                ->references('id')
-                ->on('files')
-                ->onDelete('set null');
+            $table->string('path');
             $table->timestamps();
         });
     }
@@ -28,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('templates');
+        Schema::dropIfExists('files');
     }
 };

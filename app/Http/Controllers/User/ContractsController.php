@@ -39,14 +39,15 @@ class ContractsController extends Controller
      */
     public function store(StoreContractRequest $request): RedirectResponse
     {
+        $contract = $this->contractRepository->createFromRequest($request);
+
         /** @var Template $template */
         $template = $this->templateRepository->getById($request->template);
 
-        if (!$this->templateFillingService->fillTemplate($template, $request->name, $request->fields)) {
+        if (!$this->templateFillingService->fillTemplate($contract, $template, $request->fields)) {
+            $contract->delete();
             throw new \Exception("Contract file not saved");
         }
-
-        $this->contractRepository->createFromRequest($request);
 
         return redirect()->route('user.contract.index');
     }
