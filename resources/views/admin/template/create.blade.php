@@ -16,6 +16,8 @@
 
                             <div class="card-body">
                                 <x-input-text field="name" />
+                                <x-input-text field="description" />
+                                <x-input-file field="preview_icon" isRequired="{{false}}"/>
                                 <x-input-checkbox-list field="fields" :items="$fieldOptions" />
                                 <x-input-file field="template_file" />
 

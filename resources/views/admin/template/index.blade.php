@@ -21,7 +21,9 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Name</th>
+                        <th scope="col">Description</th>
                         <th scope="col">Storage path</th>
+                        <th scope="col">Icon path</th>
                         <th scope="col">Fields</th>
                     </tr>
                     </thead>
@@ -30,7 +32,13 @@
                         <tr>
                             <th scope="row">{{ $idx + 1 }}</th>
                             <td>{{ $template->name }}</td>
+                            <td>{{ $template->description }}</td>
                             <td>{{ $template->file->path }}</td>
+                            <td>
+                                <a href="{{ $template->previewIcon->getPublicUrl() }}">
+                                    {{ $template->previewIcon->getPublicUrl() }}
+                                </a>
+                            </td>
                             <td>{{ $template->fields->map(fn($field) => $field->name)->toJson() }}</td>
                         </tr>
                     @endforeach

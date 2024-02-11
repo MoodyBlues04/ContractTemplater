@@ -14,8 +14,14 @@ return new class extends Migration
         Schema::create('templates', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
+            $table->string('description');
+            $table->foreignId('preview_icon_file_id')->nullable();
             $table->foreignId('file_id')->nullable();
             $table->foreign('file_id')
+                ->references('id')
+                ->on('files')
+                ->onDelete('set null');
+            $table->foreign('preview_icon_file_id')
                 ->references('id')
                 ->on('files')
                 ->onDelete('set null');

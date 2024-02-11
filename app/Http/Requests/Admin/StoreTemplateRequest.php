@@ -17,9 +17,10 @@ class StoreTemplateRequest extends ExtraValidationRequest
      */
     public function rules(): array
     {
-//        dd($this);
         return [
             'name' => 'required|string',
+            'description' => 'required|string',
+            'preview_icon' => 'nullable|file|mimes:png,jpeg,jpg',
             'fields' => 'required|array',
             'fields.*' => 'required|integer|' . Rule::exists('fields', 'id'),
             'template_file' => 'sometimes|required_if:requestType,sick|mimes:doc,docx'

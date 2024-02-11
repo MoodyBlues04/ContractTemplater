@@ -16,8 +16,14 @@ Route::prefix('profile')
 });
 
 Route::resource('document', DocumentsController::class)->only(['index', 'update', 'store']);
-Route::resource('contract', ContractsController::class)->only(['index', 'update', 'store']);
 
+Route::prefix('contract')
+    ->as('contract.')
+    ->controller(ContractsController::class)
+    ->group(function() {
+        Route::get('/', 'index')->name('index');
+        Route::post('/fill-template', 'fillTemplate')->name('fill_template');
+});
 Route::prefix('tariff')
     ->as('tariff.')
     ->controller(TariffController::class)

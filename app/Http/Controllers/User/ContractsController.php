@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\User\StoreContractRequest;
+use App\Http\Requests\User\FillTemplateRequest;
 use App\Models\Template;
 use App\Repositories\ContractRepository;
 use App\Repositories\TemplateRepository;
@@ -15,7 +15,6 @@ class ContractsController extends Controller
 {
     public function __construct(
         private TemplateRepository $templateRepository,
-        private ContractRepository $contractRepository,
         private TemplateFillingService $templateFillingService
     ) {
         $this->middleware('user');
@@ -27,23 +26,21 @@ class ContractsController extends Controller
 //        TODO show page by link
 //        TODO edit contract data
         $templates = $this->templateRepository->getAll();
-        $contracts = $this->contractRepository->getAll();
 
-        return view('user.contract', compact('templates', 'contracts'));
+        return view('user.contract', compact('templates'));
     }
 
     /**
      * @throws \Exception
      */
-    public function store(StoreContractRequest $request): RedirectResponse
+    public function fillTemplate(FillTemplateRequest $request): RedirectResponse
     {
-        $contract = $this->contractRepository->createFromRequest($request);
-
         /** @var Template $template */
         $template = $this->templateRepository->getById($request->template);
 
-        if (!$this->templateFillingService->fillTemplate($contract, $template, $request->fields)) {
-            $contract->delete();
+        dd($request);
+
+        if (!$this->templateFillingService->fillTemplate($template, $request->fields)) {
             throw new \Exception("Contract file not saved");
         }
 

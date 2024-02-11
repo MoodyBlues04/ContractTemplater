@@ -7,7 +7,7 @@ use App\Models\Template;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
-class StoreContractRequest extends ExtraValidationRequest
+class FillTemplateRequest extends ExtraValidationRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -18,8 +18,6 @@ class StoreContractRequest extends ExtraValidationRequest
     {
         return [
             'template' => 'required|integer|' . Rule::exists('templates', 'id'),
-            'name' => 'required|string',
-            'description' => 'nullable|string',
             'fields' => 'required|array'
         ];
     }

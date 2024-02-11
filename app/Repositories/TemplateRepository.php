@@ -18,12 +18,18 @@ class TemplateRepository extends Repository
      */
     public function createFromRequest(StoreTemplateRequest $request): Template
     {
-        $file = File::storeUploadedFile($request->file('template_file'), Template::STORAGE_DIR);
+        $templateFile = File::storeUploadedFile($request->file('template_file'), Template::STORAGE_DIR);
+        $iconFile = null;
+        if ($request->hasFile('preview_icon')) {
+            $iconFile = File::storeUploadedFile($request->file('preview_icon'), Template::ICONS_DIR);
+        }
 
         /** @var Template $template */
         $template = $this->create([
             'name' => $request->name,
-            'file_id' => $file->id
+            'description' => $request->description,
+            'file_id' => $templateFile->id,
+            'preview_icon_file_id' => is_null($iconFile) ? null : $iconFile->id,
         ]);
         $template->fields()->attach($request->fields);
 

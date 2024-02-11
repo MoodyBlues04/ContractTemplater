@@ -13,13 +13,15 @@ use Illuminate\Http\UploadedFile;
 
 /**
  * @property int $id
- * @property int $file_id
+ * @property ?int $file_id
+ * @property ?int $preview_icon_file_id
  * @property string $name
+ * @property string $description
  * @property string $created_at
  * @property string $updated_at
  *
  * @property File $file
- * @property Collection $contracts
+ * @property File $previewIcon
  * @property Collection $fields
  */
 class Template extends Model
@@ -27,6 +29,7 @@ class Template extends Model
     use HasFactory, HasFields;
 
     public const STORAGE_DIR = 'templates';
+    public const ICONS_DIR = 'public/icons';
 
     /**
      * The attributes that are mass assignable.
@@ -36,12 +39,9 @@ class Template extends Model
     protected $fillable = [
         'name',
         'file_id',
+        'description',
+        'preview_icon_file_id',
     ];
-
-    public function contracts(): HasMany
-    {
-        return $this->hasMany(Contract::class);
-    }
 
     public function fields(): BelongsToMany
     {
@@ -51,5 +51,9 @@ class Template extends Model
     public function file(): BelongsTo
     {
         return $this->belongsTo(File::class, 'file_id');
+    }
+    public function previewIcon(): BelongsTo
+    {
+        return $this->belongsTo(File::class, 'preview_icon_file_id');
     }
 }

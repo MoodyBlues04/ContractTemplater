@@ -47,4 +47,9 @@ class File extends Model
         /** @var File */
         return self::query()->create(['path' => $path]);
     }
+
+    public function getPublicUrl(): string
+    {
+        return str_replace('app/public', 'storage', url($this->path));
+    }
 }
