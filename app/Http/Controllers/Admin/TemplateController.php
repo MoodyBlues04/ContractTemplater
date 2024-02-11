@@ -39,8 +39,6 @@ class TemplateController extends Controller
      */
     public function store(StoreTemplateRequest $request): RedirectResponse
     {
-//        dd($request);
-//        TODO save icon & description
         $this->templateRepository->createFromRequest($request);
 
         return redirect()->route('admin.template.index');
