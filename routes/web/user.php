@@ -7,6 +7,8 @@ use App\Http\Controllers\User\ContractsController;
 use App\Http\Controllers\User\TariffController;
 use App\Http\Controllers\User\BillingController;
 
+Route::view('/test', 'user.lk-agreement');
+
 Route::prefix('profile')
     ->as('profile.')
     ->controller(ProfileController::class)

@@ -18,18 +18,7 @@ class FillTemplateRequest extends ExtraValidationRequest
     {
         return [
             'template' => 'required|integer|' . Rule::exists('templates', 'id'),
-            'fields' => 'required|array'
+            'document' => 'required|integer|' . Rule::exists('documents', 'id'),
         ];
-    }
-
-    /**
-     * @throws ValidationException
-     */
-    public function extraValidation(\Illuminate\Validation\Validator $validator): void
-    {
-        $data = $validator->getData();
-        /** @var Template $template */
-        $template = Template::query()->findOrFail($data['template']);
-        $template->validateFields($data['fields']);
     }
 }
