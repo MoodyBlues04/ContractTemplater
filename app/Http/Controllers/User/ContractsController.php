@@ -4,15 +4,12 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreContractRequest;
-use App\Models\Contract;
 use App\Models\Template;
 use App\Repositories\ContractRepository;
 use App\Repositories\TemplateRepository;
 use App\Services\TemplateFillingService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
-use PhpOffice\PhpWord\Exception\Exception;
 
 class ContractsController extends Controller
 {

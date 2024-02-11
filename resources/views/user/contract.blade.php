@@ -74,7 +74,7 @@
 
 
 
-                
+
 {{--            TODO !!!!!!!!!! buttons on top not on JS, but on php => 3 views with same top buttons => 3 actions: index, create, show --}}
 
 
@@ -88,7 +88,7 @@
                 </div>
             </div>
 
-            <div class="section1-top-container__lk-documents" id="agreement3">
+            <div class="section1-container__lk-agreement" id="agreement3">
                 <h3>Создание</h3>
                 <select id="template_select" name="template" onchange="selectTemplate()">
                     <option value="{{null}}">Выберите шаблон</option>
