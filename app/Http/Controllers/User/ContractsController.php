@@ -13,6 +13,8 @@ use App\Repositories\TemplateRepository;
 use App\Services\ContractService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
+use PhpOffice\PhpWord\Exception\CopyFileException;
+use PhpOffice\PhpWord\Exception\CreateTemporaryFileException;
 
 class ContractsController extends Controller
 {
@@ -57,9 +59,16 @@ class ContractsController extends Controller
         return view('user.contract.edit', compact('contract'));
     }
 
-    public function update(UpdateContractRequest $request, Contract $contract)
+    /**
+     * @throws CopyFileException
+     * @throws CreateTemporaryFileException
+     * @throws \Exception
+     */
+    public function update(UpdateContractRequest $request, Contract $contract): RedirectResponse
     {
-        $this->contractService->updateContract($contract, $request->fields);
+        if (!$this->contractService->updateContract($contract, $request->fields)) {
+            throw new \Exception('Contract data not saved');
+        }
 
         return redirect()->route('user.contract.show', $contract);
     }

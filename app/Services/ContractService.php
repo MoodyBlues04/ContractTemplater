@@ -49,7 +49,7 @@ class ContractService
      * @throws CreateTemporaryFileException
      * @throws \Exception
      */
-    public function updateContract(Contract $contract, array $fieldsData): void
+    public function updateContract(Contract $contract, array $fieldsData): bool
     {
         $templateProcessor = new TemplateProcessor(storage_path($contract->template->file->path));
 
@@ -60,5 +60,8 @@ class ContractService
         if (!WordToPdf::wordToPdf(storage_path($contract->docxFile->path), storage_path($contract->pdfFile->path))) {
             throw new \Exception("Word to pdf failed");
         }
+
+        $contract->data = $fieldsData;
+        return $contract->save();
     }
 }
