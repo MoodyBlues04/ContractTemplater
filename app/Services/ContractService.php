@@ -6,14 +6,16 @@ use App\Helpers\WordToPdf;
 use App\Models\Contract;
 use App\Models\File;
 use App\Models\Template;
+use PhpOffice\PhpWord\Exception\CopyFileException;
+use PhpOffice\PhpWord\Exception\CreateTemporaryFileException;
 use PhpOffice\PhpWord\TemplateProcessor;
 
-class TemplateFillingService
+class ContractService
 {
     /**
      * @throws \Exception
      */
-    public function fillTemplate(Template $template, array $fieldsData, ?int $userId = null): Contract
+    public function createContract(Template $template, array $fieldsData, ?int $userId = null): Contract
     {
 //        $template->validateFields($fieldsData);
 
@@ -40,5 +42,23 @@ class TemplateFillingService
             'pdf_file_id' => $pdfFile->id,
             'data' => $fieldsData,
         ]);
+    }
+
+    /**
+     * @throws CopyFileException
+     * @throws CreateTemporaryFileException
+     * @throws \Exception
+     */
+    public function updateContract(Contract $contract, array $fieldsData): void
+    {
+        $templateProcessor = new TemplateProcessor(storage_path($contract->template->file->path));
+
+        $templateProcessor->setValues($fieldsData);
+
+        $templateProcessor->saveAs(storage_path($contract->docxFile->path));
+
+        if (!WordToPdf::wordToPdf(storage_path($contract->docxFile->path), storage_path($contract->pdfFile->path))) {
+            throw new \Exception("Word to pdf failed");
+        }
     }
 }

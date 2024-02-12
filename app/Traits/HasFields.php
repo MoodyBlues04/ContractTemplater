@@ -21,14 +21,13 @@ trait HasFields
         return $this->fields->all();
     }
 
-    public function getValidationRules(): array
+    public function getValidationRules(array $extraRules = []): array
     {
         $rules = [];
         foreach ($this->getFields() as $field) {
-            $rules[$field->name] = [
-                'required',
+            $rules[$field->name] = array_merge([
                 $field->type,
-            ];
+            ], $extraRules);
         }
         return $rules;
     }
@@ -36,9 +35,9 @@ trait HasFields
     /**
      * @throws ValidationException
      */
-    public function validateFields(array $data): void
+    public function validateFields(array $data, array $extraRules = []): void
     {
-        Validator::make($data, $this->getValidationRules())->validate();
+        Validator::make($data, $this->getValidationRules($extraRules))->validate();
     }
 
     abstract public function fields(): BelongsToMany;

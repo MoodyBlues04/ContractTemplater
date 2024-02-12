@@ -2,18 +2,13 @@
 
 namespace App\Http\Requests\User;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\ExtraValidationRequest;
+use App\Models\Template;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 
-class UpdateContractRequest extends FormRequest
+class UpdateContractRequest extends ExtraValidationRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return false;
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -22,7 +17,19 @@ class UpdateContractRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'template' => 'required|integer|' . Rule::exists('templates', 'id'),
+            'fields' => 'required|array',
         ];
+    }
+
+    /**
+     * @throws ValidationException
+     */
+    public function extraValidation(\Illuminate\Validation\Validator $validator): void
+    {
+        $data = $validator->getData();
+        /** @var Template $template */
+        $template = Template::query()->findOrFail($data['template']);
+        $template->validateFields($data['fields'], ['nullable']);
     }
 }

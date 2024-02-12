@@ -28,7 +28,7 @@ Route::prefix('contract')
         Route::get('/{contract}/edit', 'edit')->name('edit');
         Route::get('/{contract}/upload', 'upload')->name('upload'); // TODO post
         Route::get('/{contract}', 'show')->name('show');
-        Route::post('/{contract}', 'update')->name('update');
+        Route::patch('/{contract}', 'update')->name('update');
 });
 
 Route::prefix('tariff')

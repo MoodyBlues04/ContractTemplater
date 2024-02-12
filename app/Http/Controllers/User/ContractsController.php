@@ -7,12 +7,10 @@ use App\Http\Requests\User\StoreContractRequest;
 use App\Http\Requests\User\UpdateContractRequest;
 use App\Models\Contract;
 use App\Models\Document;
-use App\Models\File;
 use App\Models\Template;
-use App\Repositories\ContractRepository;
 use App\Repositories\DocumentRepository;
 use App\Repositories\TemplateRepository;
-use App\Services\TemplateFillingService;
+use App\Services\ContractService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -20,18 +18,14 @@ class ContractsController extends Controller
 {
     public function __construct(
         private TemplateRepository $templateRepository,
-        private ContractRepository $contractRepository,
         private DocumentRepository $documentRepository,
-        private TemplateFillingService $templateFillingService
+        private ContractService $contractService
     ) {
         $this->middleware('user');
     }
 
     public function index(): View
     {
-//        TODO attach document opportunity
-//        TODO show page by link
-//        TODO edit contract data
         $templates = $this->templateRepository->getAll();
         $documents = $this->documentRepository->getAll();
 
@@ -48,7 +42,7 @@ class ContractsController extends Controller
         /** @var Document $document */
         $document = $this->documentRepository->getById($request->document);
 
-        $contract = $this->templateFillingService->fillTemplate($template, $document->data);
+        $contract = $this->contractService->createContract($template, $document->data);
 
         return redirect()->route('user.contract.show', compact('contract'));
     }
@@ -58,16 +52,16 @@ class ContractsController extends Controller
         return view('user.contract.show', compact('contract'));
     }
 
-    public function edit(Contract $contract)
+    public function edit(Contract $contract): View
     {
-//        TODO take back contracts table & pass it (and store)
-//        TODO db schema
-        dd($contract);
+        return view('user.contract.edit', compact('contract'));
     }
 
     public function update(UpdateContractRequest $request, Contract $contract)
     {
-        dd($request, $contract);
+        $this->contractService->updateContract($contract, $request->fields);
+
+        return redirect()->route('user.contract.show', $contract);
     }
 
     public function upload(Contract $contract): \Symfony\Component\HttpFoundation\BinaryFileResponse
