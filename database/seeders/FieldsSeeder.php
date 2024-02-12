@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Field;
-use App\Models\Helpers\FieldTypes;
+use App\Models\Enums\FieldTypes;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 

@@ -16,9 +16,6 @@
                      class="section1-top-block__lk-agreement section1-top-block-active__lk-agreement">
                     Создание договора
                 </div>
-                <div data-tab-agreement="#agreement2" class="section1-top-block__lk-agreement">
-                    Просмотр и редактирование договора
-                </div>
             </div>
 
             <div id="agreement1" class="section1-container__lk-agreement section1-container-active__lk-agreement">
@@ -37,24 +34,6 @@
                     </div>
                 @endforeach
             </div>
-
-            <div class="section1-container__lk-agreement" id="agreement2">
-                <div class="section1-container-blur__lk-agreement">
-                    <p>
-                        Доступ откроется после оплаты подписки на нашем сервисе
-                    </p>
-                    <a href="#!">
-                       Выбрать тариф для оплаты
-                    </a>
-                </div>
-{{--                TODO test change link to real pdf file --}}
-
-                <embed src="{{asset('/img/Договор_об_оказании_услуг%20(5).pdf')}}" type="application/pdf" width="100%" height="100%">
-                <div class="section1-container-btns__lk-agreement">
-                    <a href="#!" class="redact-data-btn">Редактировать данные</a>
-                    <a href="#!" class="download-pdf-btn">Скачать pdf договор</a>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -67,7 +46,7 @@
             <p class="titleModal">
                 Выберите данные для заполнения
             </p>
-            <form action="{{route('user.contract.fill_template')}}" method="POST">
+            <form action="{{route('user.contract.store')}}" method="POST">
                 @csrf
                 <div class="modal-container">
                     @foreach($documents as $idx => $document)

@@ -24,8 +24,13 @@ Route::prefix('contract')
     ->controller(ContractsController::class)
     ->group(function() {
         Route::get('/', 'index')->name('index');
-        Route::post('/fill-template', 'fillTemplate')->name('fill_template');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/{contract}/edit', 'edit')->name('edit');
+        Route::get('/{contract}/upload', 'upload')->name('upload'); // TODO post
+        Route::get('/{contract}', 'show')->name('show');
+        Route::post('/{contract}', 'update')->name('update');
 });
+
 Route::prefix('tariff')
     ->as('tariff.')
     ->controller(TariffController::class)

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreFieldRequest;
-use App\Models\Helpers\FieldTypes;
+use App\Models\Enums\FieldTypes;
 use App\Repositories\FieldRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;

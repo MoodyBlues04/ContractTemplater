@@ -1,19 +1,17 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests\User;
 
-use App\Models\Enums\FieldTypes;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class StoreFieldRequest extends FormRequest
+class UpdateContractRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,9 +22,7 @@ class StoreFieldRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string',
-            'label' => 'required|string',
-            'type' => 'required|string|' . Rule::in(FieldTypes::TYPES),
+            //
         ];
     }
 }

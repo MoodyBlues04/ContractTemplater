@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -21,9 +22,10 @@ use Illuminate\Notifications\Notifiable;
  * @property string $created_at
  * @property string $updated_at
  *
+ * @property Subscription $subscription
+ * @property Collection $contracts
  * @property Collection $documents
  * @property Collection $payments
- * @property Collection $subscriptions
  */
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -72,8 +74,13 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Payments::class);
     }
 
-    public function subscriptions(): HasMany
+    public function contracts(): HasMany
     {
-        return $this->hasMany(Subscription::class);
+        return $this->hasMany(Contract::class);
+    }
+
+    public function subscription(): HasOne
+    {
+        return $this->hasOne(Subscription::class);
     }
 }

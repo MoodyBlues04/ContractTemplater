@@ -3,6 +3,8 @@
 namespace App\Services;
 
 use App\Helpers\WordToPdf;
+use App\Models\Contract;
+use App\Models\File;
 use App\Models\Template;
 use PhpOffice\PhpWord\TemplateProcessor;
 
@@ -11,7 +13,7 @@ class TemplateFillingService
     /**
      * @throws \Exception
      */
-    public function fillTemplate(Template $template, array $fieldsData): string
+    public function fillTemplate(Template $template, array $fieldsData, ?int $userId = null): Contract
     {
 //        $template->validateFields($fieldsData);
 
@@ -19,16 +21,24 @@ class TemplateFillingService
 
         $templateProcessor->setValues($fieldsData);
 
-        $baseFileName = storage_path("app/contracts/{$template->id}_" . time());
-        $templateProcessor->saveAs("$baseFileName.docx");
+        $fileName = "app/public/contracts/{$template->id}_" . time();
+        $docxName = $fileName . '.docx';
+        $pdfName = $fileName . '.pdf';
 
-        $isSaved = WordToPdf::wordToPdf("$baseFileName.docx", "$baseFileName.pdf");
-        unlink("$baseFileName.docx");
+        $templateProcessor->saveAs(storage_path($docxName));
+        $docxFile = File::createFromPath($docxName);
 
-        if (!$isSaved) {
+        if (!WordToPdf::wordToPdf(storage_path($docxName), storage_path($pdfName))) {
             throw new \Exception("Word to pdf failed");
         }
+        $pdfFile = File::createFromPath($pdfName);
 
-        return $baseFileName;
+        /** @var Contract */
+        return $template->contracts()->create([
+            'user_id' => $userId ?? auth()->user()->id,
+            'docx_file_id' => $docxFile->id,
+            'pdf_file_id' => $pdfFile->id,
+            'data' => $fieldsData,
+        ]);
     }
 }

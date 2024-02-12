@@ -7,7 +7,7 @@ use App\Models\Template;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
-class FillTemplateRequest extends ExtraValidationRequest
+class StoreContractRequest extends ExtraValidationRequest
 {
     /**
      * Get the validation rules that apply to the request.

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Helpers;
+namespace App\Models\Enums;
 
 use App\View\Objects\DropdownItem;
 

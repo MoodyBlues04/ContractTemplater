@@ -12,8 +12,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $template_id
  * @property int $docx_file_id
  * @property int $pdf_file_id
- * @property string $name
- * @property string $description
  * @property string $data
  * @property string $created_at
  * @property string $updated_at
@@ -36,8 +34,6 @@ class Contract extends Model
     protected $fillable = [
          'user_id',
          'template_id',
-         'name',
-         'description',
          'docx_file_id',
          'pdf_file_id',
          'data',
@@ -65,10 +61,5 @@ class Contract extends Model
     public function pdfFile(): BelongsTo
     {
         return $this->belongsTo(File::class, 'pdf_file_id');
-    }
-
-    public function getStoragePath(string $ext = ''): string
-    {
-        return "app/contracts/user-{$this->user_id}_{$this->name}{$ext}";
     }
 }

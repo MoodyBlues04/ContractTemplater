@@ -35,8 +35,8 @@
                             <td>{{ $template->description }}</td>
                             <td>{{ $template->file->path }}</td>
                             <td>
-                                <a href="{{ $template->previewIcon->getPublicUrl() }}">
-                                    {{ $template->previewIcon->getPublicUrl() }}
+                                <a href="{{ $template->previewIcon ? $template->previewIcon->getPublicUrl() : '' }}">
+                                    {{ $template->previewIcon ? $template->previewIcon->getPublicUrl() : 'not chosen' }}
                                 </a>
                             </td>
                             <td>{{ $template->fields->map(fn($field) => $field->name)->toJson() }}</td>

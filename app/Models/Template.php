@@ -22,6 +22,7 @@ use Illuminate\Http\UploadedFile;
  *
  * @property File $file
  * @property File $previewIcon
+ * @property Collection $contracts
  * @property Collection $fields
  */
 class Template extends Model
@@ -46,6 +47,11 @@ class Template extends Model
     public function fields(): BelongsToMany
     {
         return $this->belongsToMany(Field::class, 'template_fields');
+    }
+
+    public function contracts(): HasMany
+    {
+        return $this->hasMany(Contract::class);
     }
 
     public function file(): BelongsTo
