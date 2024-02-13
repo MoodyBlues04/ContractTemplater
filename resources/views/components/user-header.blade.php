@@ -10,7 +10,7 @@
 <header class="header-lk">
     <div class="container container-lk">
         <div class="header-container">
-            <a href="{{ route('user.profile') }}" class="header-container-logo">
+            <a href="{{ route('user.profile.index') }}" class="header-container-logo">
                 Logo
             </a>
             <div class="header-container-right">

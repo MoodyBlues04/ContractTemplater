@@ -7,6 +7,22 @@ use App\Http\Controllers\User\ContractsController;
 use App\Http\Controllers\User\TariffController;
 use App\Http\Controllers\User\BillingController;
 
+
+
+
+
+/**
+ * TODO documents screening
+ * TODO new views
+ * TODO payments
+ * TODO deploy
+ */
+
+
+
+
+
+
 Route::view('/test', 'user.lk-agreement');
 
 Route::prefix('profile')
