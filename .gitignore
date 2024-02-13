@@ -21,3 +21,4 @@ yarn-error.log
 # server
 composer.phar
 index.php
+.htaccess
