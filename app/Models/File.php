@@ -50,6 +50,6 @@ class File extends Model
 
     public function getPublicUrl(): string
     {
-        return str_replace('app/public', 'storage', url($this->path));
+        return str_replace('app/public', 'storage', asset($this->path));
     }
 }
