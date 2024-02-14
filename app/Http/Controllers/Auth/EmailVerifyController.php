@@ -29,7 +29,7 @@ class EmailVerifyController extends Controller
     public function notice(Request $request): RedirectResponse|View
     {
         return $request->user()->hasVerifiedEmail()
-            ? redirect()->route('home')
+            ? redirect()->route('user.profile.index')
             : view('auth.verify_email_notice');
     }
 
