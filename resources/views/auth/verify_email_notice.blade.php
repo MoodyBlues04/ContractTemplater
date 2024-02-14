@@ -1,26 +1,25 @@
 @extends('layouts.public-layout')
 
 @section('content')
-    <section class="section1__main">
+    <section class="section-register">
         <div class="container">
-            <div class="section1-container__main">
-                <div class="section1-container-top__main">
-                    <div class="row justify-content-center mt-5">
-                        <div class="col-md-8">
-                            <div class="card">
-                                <div class="card-header">Verify Your Email Address</div>
-                                <div class="card-body">
-                                    Before proceeding, please check your email for a verification link. If you did not receive the email,
-                                    <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
-                                        @csrf
-                                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">click here to request another</button>.
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+            <div class="section-register-container">
+                <div class="section-register-container-left">
+                    <div class="section-register-container-left-text">
+                        <h2>Верификация почты</h2>
+                        <p>Для того, чтобы продолжить, пожалуйста проверьте вашу почту (возможно наше письмо находится в папке спам) и перейдите по ссылке для подтверждения вашей почты. Если письмо не пришло, нажмите кнопку - отправить заново.</p>
                     </div>
+                    <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+                        @csrf
+                        <div class="section-register-container-left-input">
+                            <button type="submit">Отправить заново</button>
+                        </div>
+                    </form>
                 </div>
             </div>
+        </div>
+        <div class="section-register-container-right">
+            <img src="{{ asset('img/rcovery.png') }}" alt="">
         </div>
     </section>
 @endsection
