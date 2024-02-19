@@ -14,7 +14,10 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        User::query()->create([
+        if (User::query()->where('email', 'admin@admin.com')->first()) {
+            return;
+        }
+        User::query()->createOrFirst([
             'name' => 'admin',
             'email' => 'admin@admin.com',
             'email_verified_at' => Carbon::now(),

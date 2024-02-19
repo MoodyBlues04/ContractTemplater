@@ -13,6 +13,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/test', function () {
+//    TODO vision models to DB to doc types
+    $passportImgPath = storage_path('app/documents/test_passport.jpg');
+    $file = file_get_contents($passportImgPath);
+    $encodedFile = base64_encode($file);
+    $request = \App\Modules\Api\YandexCloudApi\Request\RecognizeDocRequest::passportRequest($encodedFile);
+    $api = new \App\Modules\Api\YandexCloudApi\YandexCloudApi();
+    dd($api->recognizeDocument($request)->getEntities());
+});
+
 Route::group([], __DIR__ . '/web/auth.php');
 Route::prefix('admin')
     ->as('admin.')

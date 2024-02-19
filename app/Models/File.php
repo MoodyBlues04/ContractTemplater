@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @property int $id
@@ -51,5 +52,10 @@ class File extends Model
     public function getPublicUrl(): string
     {
         return str_replace('app/public', 'storage', asset($this->path));
+    }
+
+    public function getFileContents(): string
+    {
+        return file_get_contents(storage_path($this->path));
     }
 }

@@ -7,23 +7,10 @@ use App\Http\Controllers\User\ContractsController;
 use App\Http\Controllers\User\TariffController;
 use App\Http\Controllers\User\BillingController;
 
-
-
-
-
 /**
  * TODO documents screening
- * TODO new views
  * TODO payments
- * TODO deploy
  */
-
-
-
-
-
-
-Route::view('/test', 'user.lk-agreement');
 
 Route::prefix('profile')
     ->as('profile.')
@@ -34,6 +21,8 @@ Route::prefix('profile')
 });
 
 Route::resource('document', DocumentsController::class)->only(['index', 'update', 'store']);
+Route::post('/document/load', DocumentsController::class . '@loadDocument')
+    ->name('document.load');
 
 Route::prefix('contract')
     ->as('contract.')

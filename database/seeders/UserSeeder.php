@@ -15,7 +15,10 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::query()->create([
+        if (User::query()->where('email', 'test@test.com')->first()) {
+            return;
+        }
+        User::query()->createOrFirst([
             'name' => 'test',
             'email' => 'test@test.com',
             'email_verified_at' => Carbon::now(),

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Enums\FieldTypes;
 use App\View\Objects\ModelToDropdownItem;
 use App\View\Objects\ToDropdownItemInterface;
 use Illuminate\Database\Eloquent\Collection;
@@ -43,5 +44,10 @@ class Field extends Model implements ToDropdownItemInterface
     public function templates(): BelongsToMany
     {
         return $this->belongsToMany(Template::class, 'template_fields');
+    }
+
+    public function isDate(): bool
+    {
+        return $this->type === FieldTypes::DATE || $this->type === FieldTypes::DATETIME;
     }
 }

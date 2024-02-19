@@ -44,7 +44,7 @@
             </div>
 
             <div class="section1-top-container__lk-documents section1-top-container1__lk-documents section1-top-container-active__lk-documents" id="doc1">
-                <img src="/{{ asset('img/icons-upload.svg') }}" alt="">
+                <img src="{{ asset('img/icons-upload.svg') }}" alt="">
                 <p>
                     Нажмите чтобы сделать фотографию документа
                 </p>
@@ -52,11 +52,26 @@
             </div>
 
             <div class="section1-top-container__lk-documents section1-top-container1__lk-documents" id="doc2">
-                <img src="/{{ asset('img/icons-upload.svg') }}" alt="">
+                <img src="{{ asset('img/icons-upload.svg') }}" alt="">
+{{--                TODO drag and drop --}}
                 <p>
                     Перетащите файл в эту область, чтобы загрузить
                 </p>
-                <button type="button">Выбрать файл</button>
+                <form id="doc-load-form" action="{{ route('user.document.load') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <script>
+                        function chooseFile() {
+                            document.getElementById('doc-load').click();
+                        }
+                        function submitForm() {
+                            document.getElementById('doc-load-form').submit()
+                        }
+                    </script>
+                    <input id="doc-load" type="file" name="document_file" hidden onchange="submitForm()">
+                    <button type="button" onclick="chooseFile()">
+                        Выбрать файл
+                    </button>
+                </form>
             </div>
 
             <div class="section1-top-container__lk-documents" id="doc3">
