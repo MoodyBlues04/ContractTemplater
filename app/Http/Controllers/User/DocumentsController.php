@@ -8,6 +8,7 @@ use App\Http\Requests\User\StoreDocumentRequest;
 use App\Http\Requests\User\UpdateDocumentRequest;
 use App\Models\Document;
 use App\Models\File;
+use App\Models\Helpers\TariffOptions;
 use App\Models\User;
 use App\Repositories\DocumentRepository;
 use App\Repositories\DocumentTypeRepository;
@@ -15,6 +16,7 @@ use App\Services\DocumentService;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
@@ -49,6 +51,12 @@ class DocumentsController extends Controller
      */
     public function loadDocument(LoadDocumentRequest $request): RedirectResponse
     {
+        /** @var User $user */
+        $user = Auth::user();
+        if (!$user->canByTariff(TariffOptions::DOCS_LOAD)) {
+            return redirect()->route('user.tariff.index');
+        }
+
         /** @var UploadedFile $documentFile */
         $documentFile = $request->file('document_file');
         $file = File::storeUploadedFile($documentFile, 'documents');

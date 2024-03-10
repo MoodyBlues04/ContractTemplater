@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Enums\SubscriptionStatus;
+use App\Models\Helpers\TariffOptions;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -82,5 +84,20 @@ class User extends Authenticatable implements MustVerifyEmail
     public function subscription(): HasOne
     {
         return $this->hasOne(Subscription::class);
+    }
+
+    public function canByTariff(string $option): bool
+    {
+        $option = $this->getTariffOption($option, 0);
+        return !is_null($option) && $option > 0;
+    }
+
+    public function getTariffOption(string $option, $default = null): mixed
+    {
+        if (is_null($this->subscription)) {
+            return null;
+        }
+        return TariffOptions::create($this->subscription->remaining_options)
+            ->get($option, $default);
     }
 }

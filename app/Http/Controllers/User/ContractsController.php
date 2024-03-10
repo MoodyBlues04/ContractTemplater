@@ -7,11 +7,14 @@ use App\Http\Requests\User\StoreContractRequest;
 use App\Http\Requests\User\UpdateContractRequest;
 use App\Models\Contract;
 use App\Models\Document;
+use App\Models\Helpers\TariffOptions;
 use App\Models\Template;
+use App\Models\User;
 use App\Repositories\DocumentRepository;
 use App\Repositories\TemplateRepository;
 use App\Services\ContractService;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use PhpOffice\PhpWord\Exception\CopyFileException;
 use PhpOffice\PhpWord\Exception\CreateTemporaryFileException;
@@ -39,6 +42,12 @@ class ContractsController extends Controller
      */
     public function store(StoreContractRequest $request): RedirectResponse
     {
+        /** @var User $user */
+        $user = Auth::user();
+        if (!$user->canByTariff(TariffOptions::CONTRACT_GENERATIONS)) {
+            return redirect()->route('user.tariff.index');
+        }
+
         /** @var Template $template */
         $template = $this->templateRepository->getById($request->template);
         /** @var Document $document */

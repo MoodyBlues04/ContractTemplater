@@ -56,14 +56,6 @@ class Payment extends Model
         $this->status = PaymentStatus::PAID;
         $this->save();
 
-        Log::error('subscr', ['data' => [
-            'period_start' => date('Y-m-d H:i:s'),
-            'period_end' => date('Y-m-d H:i:s', strtotime('+1 month')),
-            'tariff_id' => $this->tariff_id,
-            'status' => SubscriptionStatus::STATUS_ACTIVE,
-            'remaining_options' => $this->tariff->options,
-        ]]);
-
         $this->user->subscription()->create([
             'period_start' => date('Y-m-d H:i:s'),
             'period_end' => date('Y-m-d H:i:s', strtotime('+1 month')),
