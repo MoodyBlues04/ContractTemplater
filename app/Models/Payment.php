@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Enums\PaymentStatus;
+use App\Models\Enums\SubscriptionStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -46,5 +48,19 @@ class Payment extends Model
     public function tariff(): BelongsTo
     {
         return $this->belongsTo(Tariff::class, 'tariff_id');
+    }
+
+    public function succeed(): void
+    {
+        $this->status = PaymentStatus::PAID;
+        $this->save();
+
+        $this->user->subscription()->create([
+            'period_start' => date('Y-m-d H:i:s'),
+            'period_end' => date('Y-m-d H:i:s', strtotime('+1 month')),
+            'tariff_id' => $this->tariff_id,
+            'status' => SubscriptionStatus::STATUS_ACTIVE,
+            'remaining_options' => $this->tariff->options,
+        ]);
     }
 }
