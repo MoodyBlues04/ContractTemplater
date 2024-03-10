@@ -33,7 +33,7 @@
                                 </li>
                             @endforeach
                         </ul>
-                        <form action="{{route('user.billing.bill', $tariff->id)}}" method="POST">
+                        <form action="{{route('user.payment.pay', $tariff)}}" method="POST">
                             @csrf
                             <button type="submit">
                                 Выбрать и оплатить

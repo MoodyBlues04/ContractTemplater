@@ -5,7 +5,7 @@ use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\DocumentsController;
 use App\Http\Controllers\User\ContractsController;
 use App\Http\Controllers\User\TariffController;
-use App\Http\Controllers\User\BillingController;
+use App\Http\Controllers\User\PaymentController;
 
 /**
  * TODO documents screening
@@ -42,9 +42,9 @@ Route::prefix('tariff')
     ->group(function() {
         Route::get('/', 'index')->name('index');
 });
-Route::prefix('billing')
-    ->as('billing.')
-    ->controller(BillingController::class)
+Route::prefix('payment')
+    ->as('payment.')
+    ->controller(PaymentController::class)
     ->group(function() {
-        Route::post('/bill/{tariffId}', 'bill')->name('bill');
+        Route::post('/pay/{tariff}', 'pay')->name('pay');
 });
