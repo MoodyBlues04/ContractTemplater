@@ -35,6 +35,7 @@ class Subscription extends Model
         'period_start',
         'period_end',
         'status',
+        'remaining_options',
     ];
 
     protected $casts = [
