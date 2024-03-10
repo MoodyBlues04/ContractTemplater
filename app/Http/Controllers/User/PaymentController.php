@@ -35,6 +35,8 @@ class PaymentController extends Controller
      */
     public function callback(Request $request): void
     {
+        Log::error('youkassa.callback_t', ['data' => 't']);
+
         $body = @file_get_contents('php://input');
         $callbackParams = json_decode($body, true);
 

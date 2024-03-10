@@ -33,7 +33,7 @@ Route::prefix('user')
     ->middleware(['auth', 'verified', 'user'])
     ->group(__DIR__ . '/web/user.php');
 
-Route::get('/pay/callback', \App\Http\Controllers\User\PaymentController::class . '@callback')
+Route::post('/pay/callback', \App\Http\Controllers\User\PaymentController::class . '@callback')
     ->name('payment.callback');
 
 Route::as('public.')->group(function () {
