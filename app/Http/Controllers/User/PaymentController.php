@@ -9,12 +9,10 @@ use App\Modules\Api\YouKassaApi\YooKassaApi;
 use App\Repositories\PaymentRepository;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use Illuminate\View\View;
 use YooKassa\Model\Notification\NotificationEventType;
-use YooKassa\Model\Notification\NotificationWaitingForCapture;
+use YooKassa\Model\Notification\NotificationSucceeded;
 use YooKassa\Model\Payment\PaymentInterface;
 use YooKassa\Model\Payment\PaymentStatus;
 
@@ -50,7 +48,7 @@ class PaymentController extends Controller
                 throw new \InvalidArgumentException('Not success payment.');
             }
 
-            $notificationModel = new NotificationWaitingForCapture($callbackData);
+            $notificationModel = new NotificationSucceeded($callbackData);
             $yooKassaPayment = $notificationModel->getObject();
             if ($yooKassaPayment->getStatus() !== PaymentStatus::SUCCEEDED) {
                 throw new \InvalidArgumentException('Not success payment model.');
