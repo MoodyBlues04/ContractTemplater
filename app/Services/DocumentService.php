@@ -54,9 +54,9 @@ class DocumentService
 
     private function getDocumentData(RecognizeDocResponse $response): array
     {
+//        TODO datetime formatting && other document types && doc type dropdown in view
         $documentData = [];
         foreach ($response->getEntities() as $entity) {
-//            TODO datetime formatting
             $documentData[$entity['name']] = $entity['text'];
         }
         if ($response->getModelType() === YandexVisionModels::PASSPORT) {

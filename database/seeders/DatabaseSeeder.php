@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             FieldsSeeder::class,
             DocumentTypeSeeder::class,
+            TariffSeeder::class,
         ]);
     }
 }

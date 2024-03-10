@@ -16,6 +16,7 @@ return new class extends Migration
             $table->date('period_start')->nullable();
             $table->date('period_end')->nullable();
             $table->string('status');
+            $table->json('remaining_options');
 
             $table->foreignId('user_id');
             $table->foreignId('tariff_id');

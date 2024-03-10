@@ -13,8 +13,8 @@ class BillingController extends Controller
         $this->middleware('user');
     }
 
-    public function index(): View
+    public function bill(int $tariffId)
     {
-        return view('user.billing');
+        dd($tariffId);
     }
 }

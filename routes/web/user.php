@@ -46,5 +46,5 @@ Route::prefix('billing')
     ->as('billing.')
     ->controller(BillingController::class)
     ->group(function() {
-        Route::get('/', 'index')->name('index');
+        Route::post('/bill/{tariffId}', 'bill')->name('bill');
 });

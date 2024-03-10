@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $id
  * @property int $user_id
  * @property int $tariff_id
+ * @property string $remaining_options
  * @property string $period_start
  * @property string $period_end
  * @property string $status
@@ -34,6 +35,10 @@ class Subscription extends Model
         'period_start',
         'period_end',
         'status',
+    ];
+
+    protected $casts = [
+        'remaining_options' => 'array',
     ];
 
     public function user(): BelongsTo
