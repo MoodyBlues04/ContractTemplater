@@ -20,6 +20,12 @@ return new class extends Migration
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
+            $table->string('description');
+            $table->foreignId('tariff_id');
+            $table->foreign('tariff_id')
+                ->references('id')
+                ->on('tariffs')
+                ->onDelete('cascade');
 
             $table->timestamps();
         });
