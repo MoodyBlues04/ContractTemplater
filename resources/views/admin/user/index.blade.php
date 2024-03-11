@@ -29,7 +29,7 @@
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->phone }}</td>
-                            <td> Not yet </td>
+                            <td> {{$user->subscription->tariff->name ?? 'No tariff paid' }} </td>
                         </tr>
                     @endforeach
                     </tbody>
