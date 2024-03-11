@@ -44,7 +44,7 @@ class ContractsController extends Controller
     {
         /** @var User $user */
         $user = Auth::user();
-        if (!$user->canByTariff(TariffOptions::CONTRACT_GENERATIONS)) {
+        if (!$user->hasTariffOption(TariffOptions::CONTRACT_GENERATIONS)) {
             return redirect()->route('user.tariff.index');
         }
 
@@ -54,6 +54,8 @@ class ContractsController extends Controller
         $document = $this->documentRepository->getById($request->document);
 
         $contract = $this->contractService->createContract($template, $document->data);
+
+        $user->usedTariffOption(TariffOptions::CONTRACT_GENERATIONS);
 
         return redirect()->route('user.contract.show', compact('contract'));
     }

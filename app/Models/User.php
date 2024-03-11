@@ -86,10 +86,19 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Subscription::class);
     }
 
-    public function canByTariff(string $option): bool
+    public function hasTariffOption(string $option): bool
     {
         $option = $this->getTariffOption($option, 0);
         return !is_null($option) && $option > 0;
+    }
+
+    public function usedTariffOption(string $option): void
+    {
+        $optionValue = $this->getTariffOption($option);
+        if (is_null($optionValue)) {
+            return;
+        }
+        $this->setTariffOption($option, $optionValue - 1);
     }
 
     public function getTariffOption(string $option, $default = null): mixed
@@ -99,5 +108,14 @@ class User extends Authenticatable implements MustVerifyEmail
         }
         return TariffOptions::create($this->subscription->remaining_options)
             ->get($option, $default);
+    }
+
+    public function setTariffOption(string $option, $value): void
+    {
+        if (is_null($this->subscription)) {
+            return;
+        }
+        TariffOptions::create($this->subscription->remaining_options)
+            ->set($option, $value);
     }
 }

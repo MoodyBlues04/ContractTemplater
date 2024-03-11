@@ -53,7 +53,7 @@ class DocumentsController extends Controller
     {
         /** @var User $user */
         $user = Auth::user();
-        if (!$user->canByTariff(TariffOptions::DOCS_LOAD)) {
+        if (!$user->hasTariffOption(TariffOptions::DOCS_LOAD)) {
             return redirect()->route('user.tariff.index');
         }
 
@@ -64,6 +64,8 @@ class DocumentsController extends Controller
         /** @var User $user */
         $user = auth()->user();
         $this->documentService->saveByImage($file->getFileContents(), $user);
+
+        $user->usedTariffOption(TariffOptions::DOCS_LOAD);
 
         return redirect()->route('user.document.index');
     }

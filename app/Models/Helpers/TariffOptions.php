@@ -30,4 +30,14 @@ class TariffOptions
     {
         return $this->tariffOptions[$key] ?? $default;
     }
+
+    public function exists(string $key): bool
+    {
+        return null !== $this->get($key, null);
+    }
+
+    public function set(string $key, $value): void
+    {
+        $this->tariffOptions[$key] = $value;
+    }
 }
