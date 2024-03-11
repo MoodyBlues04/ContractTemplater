@@ -16,6 +16,11 @@ class TariffOptions
         return new self($tariffOptions);
     }
 
+    public function getOptions(): array
+    {
+        return $this->tariffOptions;
+    }
+
     public function getContractGenerations(): int
     {
         return $this->get(self::CONTRACT_GENERATIONS, 0);

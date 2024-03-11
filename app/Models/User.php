@@ -106,8 +106,7 @@ class User extends Authenticatable implements MustVerifyEmail
         if (is_null($this->subscription)) {
             return null;
         }
-        return TariffOptions::create($this->subscription->remaining_options)
-            ->get($option, $default);
+        return $this->subscription->getTariffOption($option, $default);
     }
 
     public function setTariffOption(string $option, $value): void
@@ -115,7 +114,6 @@ class User extends Authenticatable implements MustVerifyEmail
         if (is_null($this->subscription)) {
             return;
         }
-        TariffOptions::create($this->subscription->remaining_options)
-            ->set($option, $value);
+        $this->subscription->setTariffOption($option, $value);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Helpers\TariffOptions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -50,5 +51,23 @@ class Subscription extends Model
     public function tariff(): BelongsTo
     {
         return $this->belongsTo(Tariff::class, 'tariff_id');
+    }
+
+    public function getTariffOption(string $option, $default = null): mixed
+    {
+        return $this->getTariffOptionsHelper()->get($option, $default);
+    }
+
+    public function setTariffOption(string $option, $value): void
+    {
+        $helper = $this->getTariffOptionsHelper();
+        $helper->set($option, $value);
+        $this->remaining_options = $helper->getOptions();
+        $this->save();
+    }
+
+    private function getTariffOptionsHelper(): TariffOptions
+    {
+        return TariffOptions::create($this->remaining_options);
     }
 }
